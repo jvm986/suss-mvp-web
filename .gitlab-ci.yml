@@ -1,0 +1,18 @@
+image: nikolaik/python-nodejs
+variables:
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+stages:
+  - deploy
+cache:
+  paths:
+    - node_modules/
+deploy:
+  stage: deploy
+  script:
+    - pip3 install awscli
+    - npm install
+    - npm run build
+    - npm run deploy
+  only:
+    - master
